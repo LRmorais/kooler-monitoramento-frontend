@@ -1,16 +1,13 @@
-import React  from 'react'
-import Maps from './components/maps'
-import './components/styles/app.css'
-
+import React from 'react'
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import Home from './components/home'
 function App() {
   return (
-    <div className="App">
-      <div>
-      <Maps />
-      </div> 
-      <div className="stg"><p>Ola</p></div>
-      
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path = "/" component={Home} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 

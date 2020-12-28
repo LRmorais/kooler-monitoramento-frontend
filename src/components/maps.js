@@ -1,4 +1,3 @@
-
 import React, {useState} from 'react'
 import { 
   GoogleMap, 
@@ -15,7 +14,7 @@ import { useEffect } from 'react';
 const libraries = ["places"];
 // 
 const mapContainerStyle = {
-  width: '80vw',
+  width: '90vw',
   height: '80vh',
 }
 // coordenadas para localização central do mapa
@@ -75,4 +74,3 @@ function Map () {
   )
 }
 export default Map ;
-
