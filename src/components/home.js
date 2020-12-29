@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -15,11 +15,17 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+// icones 
 import MapIcon from '@material-ui/icons/Map';
 import SpeedIcon from '@material-ui/icons/Speed';
-
-
+import ViewListIcon from '@material-ui/icons/ViewList';
+import BatteryCharging90Icon from '@material-ui/icons/BatteryCharging90';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+// componentes
 import Maps from '../components/maps';
+import Gauge from '../components/gauge';
 
 const drawerWidth = 240;
 
@@ -86,6 +92,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MiniDrawer() {
+  // component define qual componente sera renderizado no Main
+  const [component, setComponent] = useState('Mapa')
+
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -146,18 +155,45 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
-          {['Localização', 'Temperatura', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text} onClick={ () => {if(text == 'Inbox'){clicar()}} }>
-              <ListItemIcon>{index % 2 === 0 ? <MapIcon /> : <SpeedIcon />}</ListItemIcon>
+          {['Mapa', 'Temperatura', 'Lista de Koolers', 'Informações'].map((text, index) => (
+            <ListItem 
+            button key={text} 
+            // setando os nomes na variavel auxiliar
+            onClick={ () => {
+              if(text == 'Mapa'){
+                setComponent('Mapa')
+              }else{
+                setComponent('Gauge')
+              }
+              } }>
+              <ListItemIcon>
+                {/* If aninhado para organizar icons e textos respectivos */}
+                {
+                  ( () => {
+                    if(index === 0){return <MapIcon />}
+                    else if(index === 1) {return <SpeedIcon />}
+                    else if(index === 2) {return <ViewListIcon />}
+                    else {return <BatteryCharging90Icon/>}
+                  } )()
+                }
+              </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          {['Facebook', 'Instagram', 'Whatsapp'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <MapIcon /> : <SpeedIcon/>}</ListItemIcon>
+              <ListItemIcon>
+                {
+                  ( () => {
+                    if(index === 0){return <FacebookIcon />}
+                    else if(index === 1) {return <InstagramIcon />}
+                    else {return <WhatsAppIcon />}
+                  } )()
+                }
+                </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
@@ -165,7 +201,16 @@ export default function MiniDrawer() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Maps />
+        {/* Estrutura condicional para selecionar componentes em main */}
+        {
+          ( () => {
+            if (component === 'Mapa'){
+              return <Maps />
+            }else{
+              return <Gauge />
+            }
+          })()
+        }
         
       </main>
     </div>
