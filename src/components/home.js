@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -15,6 +15,8 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+
+
 // icones 
 import MapIcon from '@material-ui/icons/Map';
 import SpeedIcon from '@material-ui/icons/Speed';
@@ -26,6 +28,8 @@ import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 // componentes
 import Maps from '../components/maps';
 import Gauge from '../components/gauge';
+
+
 
 const drawerWidth = 240;
 
@@ -98,9 +102,12 @@ export default function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const clicar = () =>{
-    console.log('funcionou o click')
+
+  function siteExterno(props) {
+    return window.open(props,"_blank")
   }
+  
+  
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -133,6 +140,8 @@ export default function MiniDrawer() {
           <Typography variant="h6" noWrap>
             Kooler of dashboard
           </Typography>
+          
+
         </Toolbar>
       </AppBar>
       <Drawer
@@ -160,9 +169,9 @@ export default function MiniDrawer() {
             button key={text} 
             // setando os nomes na variavel auxiliar
             onClick={ () => {
-              if(text == 'Mapa'){
+              if(text === 'Mapa'){
                 setComponent('Mapa')
-              }else{
+              }else if(text === 'Temperatura'){
                 setComponent('Gauge')
               }
               } }>
@@ -184,7 +193,16 @@ export default function MiniDrawer() {
         <Divider />
         <List>
           {['Facebook', 'Instagram', 'Whatsapp'].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem 
+            button key={text}
+            onClick={ () => {
+              if(text === 'Facebook'){
+                siteExterno('https://www.facebook.com/Laborat%C3%B3rio-de-Engenhocas-UFPA-174121902675318/')
+              }else if(text === 'Instagram'){
+                siteExterno('https://www.instagram.com/labengenhocasufpa/')
+              }
+              } }
+            >
               <ListItemIcon>
                 {
                   ( () => {
@@ -206,7 +224,7 @@ export default function MiniDrawer() {
           ( () => {
             if (component === 'Mapa'){
               return <Maps />
-            }else{
+            }else if(component === 'Gauge'){
               return <Gauge />
             }
           })()
