@@ -25,10 +25,11 @@ import BatteryCharging90Icon from '@material-ui/icons/BatteryCharging90';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
-// componentes
+// componentes a serem renderizados
 import Maps from '../components/maps';
 import Gauge from '../components/gauge';
-
+import KoolerList from '../components/koolerList';
+import Teste from '../components/testes';
 
 
 const drawerWidth = 240;
@@ -102,7 +103,8 @@ export default function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
+  
+// função para abrir site externo
   function siteExterno(props) {
     return window.open(props,"_blank")
   }
@@ -173,6 +175,10 @@ export default function MiniDrawer() {
                 setComponent('Mapa')
               }else if(text === 'Temperatura'){
                 setComponent('Gauge')
+              }else if( text === 'Lista de Koolers'){
+                setComponent('Lista')
+              }else if( text === 'Informações'){
+                setComponent('info')
               }
               } }>
               <ListItemIcon>
@@ -226,6 +232,10 @@ export default function MiniDrawer() {
               return <Maps />
             }else if(component === 'Gauge'){
               return <Gauge />
+            }else if(component === 'Lista'){
+              return <KoolerList />
+            }else if(component === 'info'){
+              return <Teste />
             }
           })()
         }
