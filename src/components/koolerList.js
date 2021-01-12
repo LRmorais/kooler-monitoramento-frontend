@@ -51,9 +51,8 @@ export default function InteractiveList() {
         setContador(contador + 1);
         setGeleira([...geleira, { id: contador, name: apelido }])
         setApelido('')
-
     }
-
+    
 
     return (
         <div className={classes.root}>
