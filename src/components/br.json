@@ -1,24 +1,56 @@
 [
     {
-        "city": "S\u00e3o Paulo", 
-        "lat":  -1.298748, 
-        "lng": -48.479703, 
-        "country": "Brazil", 
-        "iso2": "BR", 
-        "admin_name": "S\u00e3o Paulo", 
-        "capital": "admin", 
-        "population": "22046000", 
-        "population_proper": "12252023"
-    }, 
+        "city": "1",
+        "lat": -1.298748,
+        "lng": -48.479703,
+        "temperatura": "40"
+    },
     {
-        "city": "Rio de Janeiro", 
-        "lat": -1.3066187501738842, 
-        "lng": -48.484146739087464, 
-        "country": "Brazil", 
-        "iso2": "BR", 
-        "admin_name": "Rio de Janeiro", 
-        "capital": "admin", 
-        "population": "12272000", 
-        "population_proper": "6520000"
-    } 
+        "city": "2",
+        "lat": -1.299771,
+        "lng": -48.473325,
+        "temperatura": "40"
+    },
+    {
+        "city": "3",
+        "lat": -1.301740,
+        "lng": -48.468772,
+        "temperatura": "40"
+    },
+    {
+        "city": "4",
+        "lat": -1.303756,
+        "lng": -48.465371,
+        "temperatura": "40"
+    },
+    {
+        "city": "5",
+        "lat": -1.305644,
+        "lng": -48.462206,
+        "temperatura": "40"
+    },
+    {
+        "city": "6",
+        "lat": -1.310782,
+        "lng": -48.457989,
+        "temperatura": "40"
+    },
+    {
+        "city": "7",
+        "lat": -1.312852,
+        "lng": -48.456498,
+        "temperatura": "40"
+    },
+    {
+        "city": "8",
+        "lat": -1.316119,
+        "lng": -48.454189,
+        "temperatura": "40"
+    },
+    {
+        "city": "9",
+        "lat": -1.319495,
+        "lng": -48.451974,
+        "temperatura": "40"
+    }
 ]

@@ -19,8 +19,8 @@ const mapContainerStyle = {
 }
 // coordenadas para localização central do mapa
 const centro = {
-  lat: -1.298748,
-  lng: -48.479703,
+  lat: -1.310782,
+  lng: -48.457989,
 }
 // opções do mapa => estilo, scroll, zoom .. etc
 const options = {
@@ -50,7 +50,7 @@ function Map () {
     <div>
       <GoogleMap
       mapContainerStyle={mapContainerStyle} 
-      zoom={14} 
+      zoom={13} 
       center={centro}
       options={options}>
 
