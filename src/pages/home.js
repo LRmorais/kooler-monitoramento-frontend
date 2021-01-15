@@ -27,10 +27,9 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 // componentes a serem renderizados
 import Maps from '../components/maps';
-import Gauge from '../components/gauge';
 import KoolerList from '../components/koolerList';
 import Teste from '../components/testes';
-
+import Chart from './temp';
 
 const drawerWidth = 240;
 
@@ -231,7 +230,7 @@ export default function MiniDrawer() {
             if (component === 'Mapa'){
               return <Maps />
             }else if(component === 'Gauge'){
-              return <Gauge />
+              return <Chart />
             }else if(component === 'Lista'){
               return <KoolerList />
             }else if(component === 'info'){

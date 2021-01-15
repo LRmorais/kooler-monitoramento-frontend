@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import { Grid, TextField, Button, InputAdornment } from '@material-ui/core'
 import { AccountCircle, LockRounded } from "@material-ui/icons";
 import { Redirect } from 'react-router-dom';
-import Axios from 'axios';
+
 
 const Register = () => {
     const [email, setEmail] = useState('');
     const [nome, setNome] = useState('');
     const [senha, setSenha] = useState('');
     const [isAuth, setIsAuth] = useState(true);
-
+/*
     const register = () => {
         Axios.post("")
     }
-
+*/
     if (!isAuth) {
         return <Redirect to="/login" />
     }
