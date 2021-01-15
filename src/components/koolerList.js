@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function InteractiveList() {
     const classes = useStyles();
-    const [dense, setDense] = React.useState(false);
     const [geleira, setGeleira] = React.useState([{ id: '0', name: '' }])
     const [apelido, setApelido] = React.useState('')
     const [contador, setContador] = React.useState(1)
@@ -62,7 +61,7 @@ export default function InteractiveList() {
                         Lista de Geleiras cadastradas
                     </Typography>
                     <div className={classes.demo}>
-                        <List dense={dense}>
+                        <List dense={false}>
                             {geleira.map((text) => (
                                 <div>
                                     {

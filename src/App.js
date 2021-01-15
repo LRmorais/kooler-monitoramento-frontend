@@ -1,10 +1,13 @@
 import React from 'react';
 import Routes from './routes';
+import ApiContextProvider from './services/api';
 
 
 function App() {
   return (
-    <Routes />
+    <ApiContextProvider>
+      <Routes />
+    </ApiContextProvider>
   );
 }
 

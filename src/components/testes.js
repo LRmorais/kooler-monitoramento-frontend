@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-
+import React, { useState, useContext } from 'react';
+import { ApiContext } from '../services/api';
 const Teste = () => {
 
+    const {users} = useContext(ApiContext);
+    console.log(users)
     const [repositories, setRepositories] = useState([{}])
     const [counter, setCounter] = useState(1)
     
