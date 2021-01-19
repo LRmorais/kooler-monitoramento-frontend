@@ -1,4 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import { ApiContext } from '../services/api';
+
 import { 
   GoogleMap, 
   useLoadScript,
@@ -10,6 +12,7 @@ import {
 import mapStyles from "./mapStyles.js";
 import dados from "./br.json";
 import { useEffect } from 'react';
+import { ListItemAvatar } from '@material-ui/core';
 
 const libraries = ["places"];
 // 
@@ -31,10 +34,15 @@ const options = {
 
 
 function Map () {
+
+  const {list} = useContext(ApiContext)
+
+
   const [data,setData] = useState([])
   useEffect(() =>{
-    setData(dados)
+    setData(list)
   });
+
   // configurações do maps
   const {isLoaded, loadError} = useLoadScript({
     // Api key fornecida pelo google cloud
@@ -54,11 +62,11 @@ function Map () {
       center={centro}
       options={options}>
 
-      {data.map((data) => (
+      {list.map((item) => (
         <Marker
-        key={data.city}
+        key={item.id}
         position={{
-          lat: data.lat, lng: data.lng
+          lat: item.lat, lng: item.lng
         }}
         icon={{
           url: "/vacina.svg",
