@@ -5,7 +5,14 @@ import {Redirect} from 'react-router-dom';
 
 
 const Login = () => {
-    const [email, setEmail] = useState('')
+    const [customerSignUp, setCustomerSignUp] = useState(
+        {email:'' ,password: ''}
+    )
+
+    const handleChange = (event) => {
+        setCustomerSignUp({...customerSignUp, [event.target.name]: event.target.value})
+    }
+
     const [isAuth, setIsAuth] = useState(true)
     
     if (!isAuth){
@@ -45,8 +52,9 @@ const Login = () => {
                         <TextField 
                         label="Email" 
                         margin="normal"
-                        value={email}
-                        onChange={(event) => { setEmail(event.target.value) }}
+                        name='email'
+                        value={customerSignUp.email}
+                        onChange={handleChange}
                         InputProps={{
                             startAdornment: (
                             <InputAdornment position="start"> 
@@ -59,7 +67,10 @@ const Login = () => {
                         <TextField 
                         type="password"
                         label="Password" 
+                        name='password'
                         margin="normal"
+                        value={customerSignUp.password}
+                        onChange={handleChange}
                         InputProps={{
                             startAdornment:(
                             <InputAdornment position="start"> 
@@ -71,7 +82,7 @@ const Login = () => {
 
                         <div style={{height:20}}/>
 
-                        <Button color="primary" variant="contained" onClick={()=> console.log(email)}>
+                        <Button color="primary" variant="contained" onClick={()=> console.log(customerSignUp)}>
                             Entrar
                         </Button>
 

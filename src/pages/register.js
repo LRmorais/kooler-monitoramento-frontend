@@ -2,18 +2,35 @@ import React, { useState } from 'react';
 import { Grid, TextField, Button, InputAdornment } from '@material-ui/core'
 import { AccountCircle, LockRounded } from "@material-ui/icons";
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 
 const Register = () => {
-    const [email, setEmail] = useState('');
-    const [nome, setNome] = useState('');
-    const [senha, setSenha] = useState('');
-    const [isAuth, setIsAuth] = useState(true);
-/*
-    const register = () => {
-        Axios.post("")
+    
+    const [customerSignUp, setCustomerSignUp] = useState(
+        { name: '', password: '', email: ''}
+    );
+
+    const handleChange = (event) => {
+        setCustomerSignUp({...customerSignUp, [event.target.name]: event.target.value})
     }
-*/
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        axios.post('http://localhost:3003/users', customerSignUp)
+          .then(function (response) {
+              console.log(response.data.token)
+              if(response.status === 200){
+                  setIsAuth(false)
+              }
+              
+          })
+          .catch(function (error) {
+              console.log(error)
+          }) 
+    }
+    const [isAuth, setIsAuth] = useState(true);
+
     if (!isAuth) {
         return <Redirect to="/login" />
     }
@@ -51,8 +68,9 @@ const Register = () => {
                         <TextField
                             label="Nome"
                             margin="normal"
-                            value={email}
-                            onChange={(event) => { setEmail(event.target.value) }}
+                            name="name"
+                            value={customerSignUp.name}
+                            onChange={handleChange}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -65,8 +83,9 @@ const Register = () => {
                         <TextField
                             label="Email"
                             margin="normal"
-                            value={email}
-                            onChange={(event) => { setEmail(event.target.value) }}
+                            name="email"
+                            value={customerSignUp.email}
+                            onChange={handleChange}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -80,6 +99,9 @@ const Register = () => {
                             type="password"
                             label="Password"
                             margin="normal"
+                            name="password"
+                            value={customerSignUp.password}
+                            onChange={handleChange}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -91,7 +113,7 @@ const Register = () => {
 
                         <div style={{ height: 20 }} />
 
-                        <Button color="primary" variant="contained" onClick={() => console.log(email)}>
+                        <Button color="primary" variant="contained" onClick={handleSubmit}>
                             Registrar
                         </Button>
 
