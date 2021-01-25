@@ -1,29 +1,34 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import axios from 'axios';
+import api from '../services/api';
 
 const Chart = () => {
 
 
 // Chamada para api --------------------------------------->
+
   const [list, setList] = useState([]);
   
-    const getTemp = async () => {
-      try {
-        const getTemps = await axios.get('http://localhost:3003/users/1/data')
-        setList(getTemps.data)
-        
-      } catch (err) {
-        console.error(err.message);
-      }
-    };
-  useEffect(() => {
-    getTemp()
+   useEffect(() => {
+    getDados()
+
     const interval=setInterval(()=>{
-      getTemp()
-     },5000)
-     return()=>clearInterval(interval)
+        getDados()
+       },5000)
+       return()=>clearInterval(interval)
   }, [])
+
+  function getDados() {
+    api.get('/users/1/data')
+   .then((response) => {
+     setList(response.data)
+   })
+   .catch((error) =>{
+     console.log(error)
+   })
+  }
+  console.log(list)
+
 // ------------------------------------------------------------->
 
 

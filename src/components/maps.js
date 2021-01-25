@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react'
-import { ApiContext } from '../services/context';
+import axios from 'axios';
 
 import { 
   GoogleMap, 
@@ -13,6 +13,7 @@ import mapStyles from "./mapStyles.js";
 import dados from "./br.json";
 import { useEffect } from 'react';
 import { ListItemAvatar } from '@material-ui/core';
+import api from '../services/api.js';
 
 const libraries = ["places"];
 // 
@@ -35,14 +36,18 @@ const options = {
 
 function Map () {
 
-  const {list} = useContext(ApiContext)
+  const [list, setList] = useState([[]]);
+  
+    const getTemp = async () => {
+      try {
+        const getTemps = await api.get('/users/1/data');
+        setList(getTemps.data)
+      } catch (err) {
+        console.error(err.message);
+      }
+    }; 
 
-
-  const [data,setData] = useState([])
-  useEffect(() =>{
-    setData(list)
-  });
-
+    getTemp()
   // configurações do maps
   const {isLoaded, loadError} = useLoadScript({
     // Api key fornecida pelo google cloud
@@ -61,7 +66,7 @@ function Map () {
       zoom={13} 
       center={centro}
       options={options}>
-
+{/* 
       {list.map((item) => (
         <Marker
         key={item.id}
@@ -76,7 +81,18 @@ function Map () {
         }}
         />
       ))}
-      
+       */}
+       <Marker
+        position={{
+          lat: -1.310782, lng: -48.457989
+        }}
+        icon={{
+          url: "/vacina.svg",
+          scaledSize: new window.google.maps.Size(50,50),
+          origin: new window.google.maps.Point(0,0),
+          anchor: new window.google.maps.Point(25,25),
+        }}
+        />
       </GoogleMap>
     </div>
   )

@@ -1,13 +1,17 @@
 import React from 'react';
-import Routes from './routes';
-import ApiContextProvider from './services/context';
+import { Router } from 'react-router-dom';
 
+import Routes from './routes';
+import {customHistory} from './services/history';
+import { DataProvider } from './services/context';
 
 function App() {
   return (
-    <ApiContextProvider>
-      <Routes />
-    </ApiContextProvider>
+    <DataProvider>
+      <Router history={customHistory}>
+        <Routes />
+      </Router>
+    </DataProvider>
   );
 }
 

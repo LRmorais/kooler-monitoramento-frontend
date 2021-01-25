@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, {useState, useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -15,6 +15,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Button from '@material-ui/core/Button';
 
 
 // icones 
@@ -30,6 +31,7 @@ import Maps from '../components/maps';
 import KoolerList from '../components/koolerList';
 import Teste from '../components/testes';
 import Chart from './temp';
+import {Context} from '../services/context'
 
 const drawerWidth = 240;
 
@@ -93,9 +95,15 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  grow:{
+    flexGrow: 1
+  }
 }));
 
 export default function MiniDrawer() {
+  // importando a função Logout definida em context.js
+  const {handleLogout} = useContext(Context)
+
   // component define qual componente sera renderizado no Main
   const [component, setComponent] = useState('Mapa')
 
@@ -141,8 +149,8 @@ export default function MiniDrawer() {
           <Typography variant="h6" noWrap>
             Kooler of dashboard
           </Typography>
-          
-
+          <div className={classes.grow}/>
+          <Button color="inherit" onClick={handleLogout} >Logout</Button>
         </Toolbar>
       </AppBar>
       <Drawer

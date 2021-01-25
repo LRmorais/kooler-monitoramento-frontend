@@ -1,16 +1,16 @@
-import React,{useState} from 'react';
+import React,{useState, useContext} from 'react';
 import { Grid, TextField, Button, InputAdornment } from '@material-ui/core'
 import { AccountCircle, LockRounded } from "@material-ui/icons";
 import {Redirect} from 'react-router-dom';
-
+// importando contexto
+import { Context } from '../services/context';
 
 const Login = () => {
-    const [customerSignUp, setCustomerSignUp] = useState(
-        {email:'' ,password: ''}
-    )
+
+    const { signUp, setSignUp, handleLogin} = useContext(Context);
 
     const handleChange = (event) => {
-        setCustomerSignUp({...customerSignUp, [event.target.name]: event.target.value})
+        setSignUp({...signUp, [event.target.name]: event.target.value})
     }
 
     const [isAuth, setIsAuth] = useState(true)
@@ -53,7 +53,7 @@ const Login = () => {
                         label="Email" 
                         margin="normal"
                         name='email'
-                        value={customerSignUp.email}
+                        value={signUp.email}
                         onChange={handleChange}
                         InputProps={{
                             startAdornment: (
@@ -69,7 +69,7 @@ const Login = () => {
                         label="Password" 
                         name='password'
                         margin="normal"
-                        value={customerSignUp.password}
+                        value={signUp.password}
                         onChange={handleChange}
                         InputProps={{
                             startAdornment:(
@@ -82,7 +82,7 @@ const Login = () => {
 
                         <div style={{height:20}}/>
 
-                        <Button color="primary" variant="contained" onClick={()=> console.log(customerSignUp)}>
+                        <Button color="primary" variant="contained" onClick={handleLogin}>
                             Entrar
                         </Button>
 
