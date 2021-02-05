@@ -20,8 +20,9 @@ const Routes = () => {
     
         <Switch >
           <CustomRoute isPrivate exact path="/home" component={Home} />
-          <CustomRoute exact path="/login" component={Login} />
-          <CustomRoute exact path='/register' component={Register} />
+          <CustomRoute path="/" exact component={Login} />
+          <CustomRoute path="/login" component={Login} />
+          <CustomRoute path='/register' component={Register} />
         </Switch>
 
     

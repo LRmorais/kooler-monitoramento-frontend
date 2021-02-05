@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -16,6 +16,8 @@ import TextField from '@material-ui/core/TextField';
 
 import Button from '@material-ui/core/Button';
 import Send from '@material-ui/icons/SendOutlined';
+
+import api from '../services/api';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,21 +39,39 @@ const useStyles = makeStyles((theme) => ({
 
 export default function InteractiveList() {
     const classes = useStyles();
-    const [geleira, setGeleira] = React.useState([{ id: '0', name: '' }])
-    const [apelido, setApelido] = React.useState('')
-    const [contador, setContador] = React.useState(1)
+    const [apelido, setApelido] = React.useState({ apelido: '' })
+    const [dados, setDados] = React.useState([]);
 
+
+    // deleta uma geleira no db
     const deletar = (id) => {
-        console.log(id)
-        const newList = geleira.filter((item) => item.id !== id)
-        setGeleira(newList);
+        api.delete(`/users/${id}/sensors`)
+            .then((response) => {
+                getData()
+                setApelido({ apelido: '' })
+            })
+
     }
+
+    // Cadastra uma no db geleira
     const inserir = () => {
-        setContador(contador + 1);
-        setGeleira([...geleira, { id: contador, name: apelido }])
-        setApelido('')
+        api.post('/users/1/sensors', apelido)
+            .then(() => {
+                getData()
+            })
+        setApelido({ apelido: '' }) 
     }
-    
+// insere os dados vindos da api na variavel de estado Dados
+    const getData = () => {
+        api.get('/users/1/sensors')
+            .then((response) => {
+                setDados(response.data.sensors)
+            });
+    }
+
+    useEffect(() => {
+        getData()
+    }, []);
 
     return (
         <div className={classes.root}>
@@ -62,7 +82,7 @@ export default function InteractiveList() {
                     </Typography>
                     <div className={classes.demo}>
                         <List dense={false}>
-                            {geleira.map((text) => (
+                            {dados.map((text) => (
                                 <div>
                                     {
                                         (() => {
@@ -77,8 +97,8 @@ export default function InteractiveList() {
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText
-                                                            primary={text.name}
-                                                            secondary={text.name}
+                                                            primary={text.apelido}
+                                                            secondary={text.apelido}
                                                         />
                                                         <ListItemSecondaryAction>
                                                             <IconButton edge="end" aria-label="delete" onClick={() => { deletar(text.id) }}>
@@ -91,6 +111,7 @@ export default function InteractiveList() {
                                             }
                                         })()
                                     }
+
                                 </div>
 
                             ))}
@@ -101,18 +122,19 @@ export default function InteractiveList() {
             </Grid>
             <form className={classes.root} noValidate autoComplete="off" >
                 <TextField label="Digite um nome"
-                    variant="outlined" value={apelido}
-                    onChange={(event) => { setApelido(event.target.value) }}
+                    name="apelido"
+                    variant="outlined" value={apelido.apelido}
+                    onChange={(event) => { setApelido({ [event.target.name]: event.target.value }) }}
                 />
             </form>
-            
+
             <Button
                 variant="contained"
                 color="primary"
                 className={classes.button}
                 endIcon={<Send />}
                 onClick={() => inserir()}
-                >
+            >
                 Send
             </Button>
 
