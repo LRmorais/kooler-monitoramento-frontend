@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Grid, TextField, Button, InputAdornment } from '@material-ui/core'
 import { AccountCircle, LockRounded } from "@material-ui/icons";
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import api from '../services/api';
 
 
 const Register = () => {
@@ -17,9 +17,9 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3003/users', customerSignUp)
+        api.post('/users', customerSignUp)
           .then(function (response) {
-              console.log(response.data.token)
+              console.log(response.status)
               if(response.status === 200){
                   setIsAuth(false)
               }
