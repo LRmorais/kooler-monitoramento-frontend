@@ -128,9 +128,9 @@ const Register = () => {
                         </Button>
                     </div>
                     <Grid container justify="center" spacing={2}>
-                        <Grid item>
+                        {/* <Grid item>
                             <Button color="primary">Go to community page</Button>
-                        </Grid>
+                        </Grid> */}
 
                         <Grid item>
                             <Button variant='outlined'> Esqueceu a senha?</Button>

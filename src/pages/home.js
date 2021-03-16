@@ -22,15 +22,15 @@ import Button from '@material-ui/core/Button';
 import MapIcon from '@material-ui/icons/Map';
 import SpeedIcon from '@material-ui/icons/Speed';
 import ViewListIcon from '@material-ui/icons/ViewList';
-import BatteryCharging90Icon from '@material-ui/icons/BatteryCharging90';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 // componentes a serem renderizados
 import Maps from '../components/maps';
 import KoolerList from '../components/koolerList';
-import Teste from '../components/testes';
 import Chart from './temp';
+import Dashboard from './dashboard'
 import {Context} from '../services/context'
 
 const drawerWidth = 240;
@@ -105,7 +105,7 @@ export default function MiniDrawer() {
   const {handleLogout} = useContext(Context)
 
   // component define qual componente sera renderizado no Main
-  const [component, setComponent] = useState('Mapa')
+  const [component, setComponent] = useState('Dashboard')
 
   const classes = useStyles();
   const theme = useTheme();
@@ -147,7 +147,7 @@ export default function MiniDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Kooler of dashboard
+          Responsive web application
           </Typography>
           <div className={classes.grow}/>
           <Button color="inherit" onClick={handleLogout} >Logout</Button>
@@ -173,29 +173,33 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
-          {['Mapa', 'Temperatura', 'Lista de Koolers', 'Informações'].map((text, index) => (
+          {['Dashboard','Mapa', 'Temperatura', 'Lista de Koolers'].map((text, index) => (
             <ListItem 
             button key={text} 
             // setando os nomes na variavel auxiliar
             onClick={ () => {
-              if(text === 'Mapa'){
+              if(text === 'Dashboard'){
+                setComponent('Dashboard')
+              }else if(text === 'Mapa'){
                 setComponent('Mapa')
               }else if(text === 'Temperatura'){
                 setComponent('Gauge')
               }else if( text === 'Lista de Koolers'){
                 setComponent('Lista')
-              }else if( text === 'Informações'){
-                setComponent('info')
               }
+              // else if( text === 'Informações'){
+              //   setComponent('info')
+              // }
               } }>
               <ListItemIcon>
                 {/* If aninhado para organizar icons e textos respectivos */}
                 {
                   ( () => {
-                    if(index === 0){return <MapIcon />}
-                    else if(index === 1) {return <SpeedIcon />}
-                    else if(index === 2) {return <ViewListIcon />}
-                    else {return <BatteryCharging90Icon/>}
+                    if(index === 0){return <DashboardIcon />}
+                    else if(index === 1){return <MapIcon />}
+                    else if(index === 2) {return <SpeedIcon />}
+                    else if(index === 3) {return <ViewListIcon />}
+
                   } )()
                 }
               </ListItemIcon>
@@ -235,15 +239,18 @@ export default function MiniDrawer() {
         {/* Estrutura condicional para selecionar componentes em main */}
         {
           ( () => {
-            if (component === 'Mapa'){
+            if (component === 'Dashboard'){
+              return <Dashboard />
+            }else if (component === 'Mapa'){
               return <Maps />
             }else if(component === 'Gauge'){
               return <Chart />
             }else if(component === 'Lista'){
               return <KoolerList />
-            }else if(component === 'info'){
-              return <Teste />
             }
+            // else if(component === 'info'){
+            //   return <Teste />
+            // }
           })()
         }
         

@@ -15,22 +15,21 @@ const Temp = () => {
 
                 </Grid>
 
-                <Grid container item xs={12} sm={6} alignItems="center" direction="column" style={{padding:10}}>
-                    <h1>Temperatura Ideal: </h1>
-                    <ul>
-                        <li>
-                            informação 1
-                        </li>
-                        <li>
-                            informação 2
-                        </li>
-                        <li>
-                            informação 3
-                        </li>
-                        <li>
-                            informação 4
-                        </li>
-                    </ul>
+                <Grid container item xs={12} sm={6} alignItems="center" direction="column" style={{ padding: 10 }}>
+                    <div style={{ color: '#1976d2' }}> 
+                        <h1 >Informações sobre a temperatura: </h1>
+                        <ul>
+                            <li>
+                                <h2> Máxima: 7°C</h2>
+                            </li>
+                            <li>
+                                <h2> Mínima: 4°C</h2>
+                            </li>
+                            <li>
+                                <h2>Média: 5°C</h2>
+                            </li>
+                        </ul>
+                    </div>
                 </Grid>
 
 

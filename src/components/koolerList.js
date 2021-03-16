@@ -19,17 +19,21 @@ import Send from '@material-ui/icons/SendOutlined';
 
 import api from '../services/api';
 
+import imgList from '../assets/list.png';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
         maxWidth: '100%',
+        backgroundColor: '#ffff'
     },
     demo: {
         backgroundColor: theme.palette.background.paper,
     },
     title: {
         margin: theme.spacing(4, 0, 2),
+        marginLeft: 6
     },
     button: {
         margin: theme.spacing(1),
@@ -74,11 +78,11 @@ export default function InteractiveList() {
     }, []);
 
     return (
-        <div className={classes.root}>
+        <div className={classes.root} >
             <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
                     <Typography variant="h6" className={classes.title}>
-                        Lista de Geleiras cadastradas
+                        Lista de Dispositivos Cadastrados
                     </Typography>
                     <div className={classes.demo}>
                         <List dense={false}>
@@ -116,11 +120,7 @@ export default function InteractiveList() {
 
                             ))}
                         </List>
-                    </div>
-                </Grid>
-
-            </Grid>
-            <form className={classes.root} noValidate autoComplete="off" >
+                        <form className={classes.root} noValidate autoComplete="off" >
                 <TextField label="Digite um nome"
                     name="apelido"
                     variant="outlined" value={apelido.apelido}
@@ -137,6 +137,14 @@ export default function InteractiveList() {
             >
                 Send
             </Button>
+                    </div>
+                </Grid>
+                <Grid item xs={12} md={6} >
+                    <img src={imgList} alt="Lista" style={{ width: '100%', height: '100%', objectFit: 'fill' }} />
+                </Grid>
+
+            </Grid>
+            
 
         </div>
     );

@@ -5,6 +5,7 @@ import {
   GoogleMap,
   useLoadScript,
   Marker,
+  DirectionsRenderer
 } from '@react-google-maps/api';
 // importando estilo dark
 import mapStyles from "./mapStyles.js";
@@ -17,6 +18,7 @@ const libraries = ["places"];
 const mapContainerStyle = {
   width: '90vw',
   height: '80vh',
+  
 }
 
 // opções do mapa => estilo, scroll, zoom .. etc
@@ -24,10 +26,16 @@ const options = {
   styles: mapStyles,
   disableDefaultUI: true,
   zoomControl: true,
+  featureType: "poi",
+        elementType: "labels",
+        stylers: [
+              { visibility: "off" }
+        ]
 }
 
 
 function Map() {
+
 
   const [list, setList] = useState([]);
   const [center, setCenter] = useState([{
@@ -39,16 +47,18 @@ function Map() {
 
     api.get('/users/1/data')
       .then((response) => {
-    
-        setList(response.data);
-        setCenter({lat: response.data[0].lat, lng: response.data[0].lng})
+        setList(response.data.data);
+        setCenter({lat: response.data.data[5].lat, lng: response.data.data[5].lng})
       
       })
       .catch(err => { console.log(err) })
   }
-
   useEffect(() => {
     getData()
+    const interval=setInterval(()=>{
+      getData()
+     },15000)
+     return()=>clearInterval(interval)
   }, []);
 
 
